@@ -1,0 +1,10 @@
+# Direct Python dependencies inferred from the source, not an environment lock.
+# Install a compatible PyTorch build before these packages (see README.md).
+numpy
+pandas
+scipy
+tqdm
+einops
+termcolor
+smplx
+# human_body_prior with load_vposer and PointNet2 are installed separately.

@@ -1,0 +1,12 @@
+-r requirements.txt
+# Selector backends, preprocessing, and visualizations; install as needed.
+transformers
+accelerate
+bitsandbytes
+openai
+trimesh
+plyfile
+matplotlib
+Pillow
+av
+qwen-vl-utils
