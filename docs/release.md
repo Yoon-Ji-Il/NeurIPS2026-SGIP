@@ -8,6 +8,7 @@ The original files, runs, and checkpoints were left in place.
 - Python and shell source from the repository root, `config`, `dataset`,
   `model`, `object_selector`, `object_selector_new`, `scripts`, `utils`, and `tests`.
 - Existing Markdown experiment notes, plus setup and data documentation.
+- The SGIP overview figure in `docs/assets/`, supplied for the README.
 - Dependency inventories, ignore rules, and a staged-file release check.
 
 ## Excluded

@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_BYTES = 5 * 1024 * 1024
 TEXT_SUFFIXES = {".py", ".sh", ".md", ".txt", ".yml", ".yaml", ".toml", ".ini"}
 TEXT_NAMES = {".gitignore", ".gitattributes", "LICENSE", "NOTICE"}
+# Explicitly allow the paper overview figure while keeping model/data binaries excluded.
+DOCUMENTATION_IMAGES = {"docs/assets/sgip_overview.png": b"\x89PNG\r\n\x1a\n"}
 GENERATED_ROOTS = {
     "data", "Dataset", "checkpoints", "pretrained_models", "vposer_v1_0",
     "third_party", "new_runs", ".new_runs", "results", "eval_results",
@@ -60,7 +62,11 @@ def main() -> int:
             path.parts[0] in GENERATED_ROOTS
             or path.parts[0].startswith("runs")
             or "__pycache__" in path.parts
-            or (path.suffix not in TEXT_SUFFIXES and path.name not in TEXT_NAMES)
+            or (
+                path.suffix not in TEXT_SUFFIXES
+                and path.name not in TEXT_NAMES
+                and name not in DOCUMENTATION_IMAGES
+            )
         ):
             issues.append((name, "not an allowed source/documentation file"))
         size = int(git("cat-file", "-s", oid))
@@ -69,6 +75,10 @@ def main() -> int:
             issues.append((name, "exceeds 5 MiB"))
             continue
         data = git("cat-file", "blob", oid)
+        if name in DOCUMENTATION_IMAGES:
+            if not data.startswith(DOCUMENTATION_IMAGES[name]):
+                issues.append((name, "invalid documentation image signature"))
+            continue
         try:
             data.decode("utf-8")
         except UnicodeDecodeError:

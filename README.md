@@ -6,6 +6,12 @@ Research code prepared for the NeurIPS 2026 paper release. This repository
 contains motion forecasting, object selection, distillation, preprocessing,
 and evaluation code from the research workspace.
 
+![Comparison of previous gaze/distance methods with SGIP's explicit interaction prior and scene-grounded prediction](docs/assets/sgip_overview.png)
+
+**Overview.** SGIP uses an explicit interaction prior to guide scene-grounded
+human motion prediction, combining semantic and geometric cues without extra
+sensing at inference.
+
 **This is a source-only release. No checkpoints or pretrained weights are
 included**, including VPoser. Datasets, cached tensors, selector outputs,
 training logs, and experiment results are also excluded. Training still writes
